@@ -15,7 +15,6 @@
         public string Audience { get; set; }
 
         [JsonProperty("grant_type")]
-        [JsonConverter(typeof(StringEnumConverter))]
         public GrantTypes GrantType { get; set; }
     }
 }

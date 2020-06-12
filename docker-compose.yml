@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Th1sIs4Pa5sw0rd
+      POSTGRES_USER: admin_Tests
+  testapirest.api:
+    image: ${DOCKER_REGISTRY-}testapirestapi
+    build:
+      context: .
+      dockerfile: TestApiRest.API/Dockerfile
