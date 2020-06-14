@@ -16,9 +16,10 @@ services:
       - testapirest
     volumes:
       - db_volume:/var/lib/postgresql/data
-      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
+      - ./dbscripts:/docker-entrypoint-initdb.d
   testapirest.api:
     image: ${DOCKER_REGISTRY-}testapirestapi
+    restart: always
     depends_on:
       - db
     build:

@@ -17,6 +17,13 @@
             options.UseNpgsql(_configuration.GetConnectionString("TestDB"));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Name = "Test", Email = "test@test.com", Balance = 12354 }
+            );
+        }
+
         public DbSet<User> Users { get; set; }
     }
 }
