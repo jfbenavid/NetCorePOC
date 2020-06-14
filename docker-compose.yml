@@ -1,14 +1,31 @@
 version: '3.4'
 
+networks:
+  testapirest:
+volumes:
+  db_volume:
 services:
   db:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: Th1sIs4Pa5sw0rd
-      POSTGRES_USER: admin_Tests
+      POSTGRES_USER: "admin_Tests"
+      POSTGRES_PASSWORD: "Th1sIs4Pa5sw0rd"
+      POSTGRES_DB: "testDb"
+    networks:
+      - testapirest
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      - ./dbscripts/seed.sql :/docker-entrypoint-initdb.d/seed.sql
   testapirest.api:
     image: ${DOCKER_REGISTRY-}testapirestapi
+    depends_on:
+      - db
     build:
       context: .
       dockerfile: TestApiRest.API/Dockerfile
+    ports:
+      - "8080:80"
+      - "8000:443"
+    networks:
+      - testapirest

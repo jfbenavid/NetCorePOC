@@ -9,10 +9,12 @@ namespace TestApiRest.API
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.HttpsPolicy;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using TestApiRest.Repository;
 
     public class Startup
     {
@@ -40,6 +42,11 @@ namespace TestApiRest.API
             services
                 .AddControllers()
                 .AddNewtonsoftJson();
+            services
+                .AddEntityFrameworkNpgsql()
+                .AddDbContext<DBContext>(
+                    opt => opt
+                        .UseNpgsql(Configuration.GetConnectionString("TestDB")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
