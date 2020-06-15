@@ -15,10 +15,7 @@ namespace TestApiRest.API.Controllers
     {
         private readonly IConfiguration _configuration;
 
-        public TestsController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        public TestsController(IConfiguration configuration) => _configuration = configuration;
 
         [HttpPost]
         public ActionResult Post(User user)

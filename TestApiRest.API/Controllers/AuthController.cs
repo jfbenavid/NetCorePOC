@@ -18,10 +18,7 @@
     {
         private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        public AuthController(IConfiguration configuration) => _configuration = configuration;
 
         [HttpPost]
         public ActionResult Post(Logon credentials)

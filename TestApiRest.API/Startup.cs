@@ -42,6 +42,7 @@ namespace TestApiRest.API
             services
                 .AddControllers()
                 .AddNewtonsoftJson();
+
             services
                 .AddEntityFrameworkNpgsql()
                 .AddDbContext<DBContext>(
